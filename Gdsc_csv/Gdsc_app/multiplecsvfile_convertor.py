@@ -14,3 +14,20 @@ with open(path_for_csv_file,'r') as csvfile:
             subcsvfile = open(csvline.strip('\n')+'.csv','w')
             continue
         subcsvfile.write(csvline)
+
+
+
+            # if request.method == 'POST':
+    #     files = request.FILES['files']
+    #     path_for_csv_file = f"/{files}"
+    #     print(path_for_csv_file)
+    #     with open(path_for_csv_file,'r') as csvfile:
+    #         for csvline in csvfile:
+    #             if csvline == '\n':
+    #                 continue
+    #             csvline = re.sub(',,+','',csvline)
+    #             csvlinelist = csvline.split(',')
+    #             if len(csvlinelist) == 1:
+    #                 subcsvfile = open(csvline.strip('\n')+'.csv','w')
+    #                 continue
+    # return HttpResponse('csv created successfully')

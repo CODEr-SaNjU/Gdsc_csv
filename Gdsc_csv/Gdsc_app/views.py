@@ -3,15 +3,17 @@ from django.http import HttpResponse
 import re
 from django.conf import settings
 import os
+import csv ,io
 # Create your views here.
 
 def Home(request):
     return render(request,'html_files/Home.htm')
 
 def csv_files(request):
-    if request.method == 'POST':
+    if "POST" == request.method:
         files = request.FILES['files']
-        path_for_csv_file = os.path.join(settings.BASE_DIR)+f"/{files}"
+        path_for_csv_file = (f"../../../{files}")
+        print(path_for_csv_file)
         with open(path_for_csv_file,'r') as csvfile:
             for csvline in csvfile:
                 if csvline == '\n':
