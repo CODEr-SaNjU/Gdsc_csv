@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Gdsc_app',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -52,7 +53,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
 ROOT_URLCONF = 'Gdsc_csv.urls'
+
+CRISPY_TEMPLATE_PACK = 'uni_form'
 
 TEMPLATES = [
     {

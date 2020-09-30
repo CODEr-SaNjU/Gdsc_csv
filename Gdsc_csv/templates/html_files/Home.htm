@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -25,18 +26,14 @@
                 <div class="container">
                     <div class="col-md-4"></div>
                     <div class="col-md-4">
-                      <form action="/csv_files/" method="POST" enctype="multipart/form-data" class="form-horizontal" > 
+                      <form action="" method="POST" enctype="multipart/form-data" class="form-horizontal" > 
                         {% csrf_token %}
                         <div class="form-group">
-                          <label for="name" >File : </label>
-                          <input type="file" name="files" id="My_file" required="True" class="form-control" accept=".csv" required>
+                          {{ form | crispy }}
                         </div>
                         <div class="form-group">                    
                           <button type="submit"  value="Upload Files" type="submit" class="btn btn-outline-secondary" style="text-align:right; margin-left: 250px; ">Upload csv</button>
                         </div>
-                        {% if uploaded_file_url %}
-                          <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
-                        {% endif %}
                       </form>
                         <!-- <form method="POST" action="/csv_files/" enctype="multipart/form-data">
                           {% csrf_token %}
