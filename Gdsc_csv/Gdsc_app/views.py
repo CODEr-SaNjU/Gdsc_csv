@@ -29,7 +29,7 @@ def csv_files(request):
                 if len(csvlinelist) == 1:
                     subcsvfile = open(csvline.strip('\n')+'.csv','w')
         return render(request, 'html_files/Home.htm', {
-            'uploaded_file_url': uploaded_file_url
+            'uploaded_file_url': subcsvfile
         })
     return render(request, 'html_files/Home.htm')
 
