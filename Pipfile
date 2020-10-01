@@ -10,6 +10,7 @@ django = "*"
 pandas = "*"
 "path.py" = "*"
 django-crispy-forms = "*"
+selenium = "*"
 
 [requires]
 python_version = "3.8"

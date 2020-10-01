@@ -20,19 +20,17 @@ def csv_files(request):
         uploaded_file_url = os.path.join(settings.BASE_DIR+fs.url(filename))
         with open(uploaded_file_url,'r') as csvfile:
             csvfile = csvfile.readlines()
-            print(csvfile)
             for csvline in csvfile:
                 if csvline == '\n':
                     continue
                 csvline = re.sub(',,+','',csvline)
                 csvlinelist = csvline.split(',')
                 if len(csvlinelist) == 1:
-                    subcsvfile = open(csvline.strip('\n')+'.csv','w')
-        return render(request, 'html_files/Home.htm', {
-            'uploaded_file_url': subcsvfile
-        })
+                    subcsvfile=open(csvline.strip('\n')+'.csv','w',)
+                    continue
+                subcsvfile.write(csvline)
+        return render(request, 'html_files/Home.htm',)
     return render(request, 'html_files/Home.htm')
-
 
 
 
