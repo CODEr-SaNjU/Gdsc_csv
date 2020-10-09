@@ -11,6 +11,8 @@ pandas = "*"
 "path.py" = "*"
 django-crispy-forms = "*"
 selenium = "*"
+django-dajax = "*"
+requests = "*"
 
 [requires]
 python_version = "3.8"

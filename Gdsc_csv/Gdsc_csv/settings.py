@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Gdsc_app',
     'crispy_forms',
+    'dajaxice',
+    'dajax',
 ]
 
 MIDDLEWARE = [

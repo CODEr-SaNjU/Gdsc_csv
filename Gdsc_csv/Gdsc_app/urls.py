@@ -4,7 +4,6 @@ from . import views
 from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('',views.csv_files,name="csv_file"),
-    path('Download_csv/',views.Download_csv,name="Download_csv")
 
 
 ]
