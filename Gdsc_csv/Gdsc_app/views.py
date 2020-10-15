@@ -25,9 +25,9 @@ def csv_files(request):
                 csvfile = csvfile.readlines()
                 basefilename, file_extension= os.path.splitext(filename)
                 # print("radhe_radhe ",basefilename,file_extension)
-                chars= 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890'
-                randomstr= ''.join((random.choice(chars)) for x in range(10))
-                new_file_name = '{randomstring}{ext}'.format(randomstring= randomstr, ext= file_extension)
+                # chars= 'Download'
+                # randomstr= ''.join((random.choice(chars)) for x in range(10))
+                new_file_name = '{randomstring}{ext}'.format(randomstring= "Download", ext= file_extension)
                 # file_path = os.path.join(settings.MEDIA_ROOT, new_file_name)
                 # print(new_file_name)
                 new_file_name_lines = open(new_file_name,'w')
