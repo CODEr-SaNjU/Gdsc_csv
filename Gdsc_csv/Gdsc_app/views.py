@@ -11,54 +11,48 @@ from selenium import webdriver
 from django.http import FileResponse
 from django.utils.encoding import smart_str
 from wsgiref.util import FileWrapper
+import random
 
-
-
-# Create your views here.
-def Download_csv(request):
-    pass
-    # return render(request,'html_files/Download.htm')
 
 def csv_files(request):
     if request.method == 'POST' and request.FILES['files']:
         myfile = request.FILES['files']
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
-        print(filename)
         uploaded_file_url = os.path.join(settings.BASE_DIR+fs.url(filename))
-        i = 0
         if os.path.exists(uploaded_file_url)==True:
             with open(uploaded_file_url,'r') as csvfile:
                 csvfile = csvfile.readlines()
-                new_File = "New_file_"+str(i)+".csv"
-                os.rename(uploaded_file_url,new_File)
-                print(new_File)
-            if os.path.exists(new_File):
-                with open(new_File, 'rb') as fh:
-                    response = HttpResponse(fh.read(), content_type="text/csv;charset=utf-8;")
-                    response['Content-Disposition'] = 'inline; filename=' + os.path.basename(new_File)
-                    return response
-            raise Http404
+                basefilename, file_extension= os.path.splitext(filename)
+                # print("radhe_radhe ",basefilename,file_extension)
+                chars= 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890'
+                randomstr= ''.join((random.choice(chars)) for x in range(10))
+                new_file_name = '{randomstring}{ext}'.format(randomstring= randomstr, ext= file_extension)
+                # file_path = os.path.join(settings.MEDIA_ROOT, new_file_name)
+                # print(new_file_name)
+                new_file_name_lines = open(new_file_name,'w')
+                new_file_name_lines.writelines("hello world")
+                # print(new_file_name)
+                if os.path.exists(new_file_name):
+                    print("FOUND File 'tempCSV.csv'")
+                    with open(new_file_name, 'w') as f:
+                        for input in csvfile:
+                            f.writelines(input)
+                            # print(f)
+                    with open(new_file_name, 'rb') as fh:
+                        response = HttpResponse(
+                            fh.read(), content_type="text/csv;charset=utf-8;")
+                        response['Content-Disposition'] = 'attachment; filename=' + new_file_name
+                        return response
+                else:
+                    print("File 'tempDownloadCSV.csv' does not exist")
+          
             return render(request, 'html_files/Home.htm',)
         else:
             return HttpResponse("please remove space from filename ya add _ in filename")
 
     return render(request, 'html_files/Home.htm')
 
-
-
-
-
-
-
-def download(request,path):
-    file_path = os.path.join(settings.MEDIA_ROOT, Path)
-    if os.path.exists(file_path):
-        with open(file_path, 'rb') as fh:
-            response = HttpResponse(fh.read(), content_type="text/csv;charset=utf-8;")
-            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
-            return response
-    raise Http404
 
 
 
