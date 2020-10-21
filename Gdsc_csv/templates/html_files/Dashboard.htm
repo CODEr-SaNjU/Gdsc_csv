@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/static/css/Dashboard.css">
 </head>
 <body>
+    <hr class="sm-5">
     <div class="header">
        <h1>Gdsc file converter</h1> 
     </div>
@@ -18,14 +19,14 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="card">
-                    <div class="card-body"><button type="button" class="btn btn-outline-success"> work on csv file </button>
+                    <a href="{% url 'csv_file' %}"><div class="card-body"><button type="button" class="btn btn-outline-success"> work on csv file </button></a>
                     </div>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-body">
-                        <button type="button" class="btn btn-outline-secondary">work on e2k file</button>
+                        <a href="{% url 'e2k_File' %}"><button type="button" class="btn btn-outline-secondary">work on e2k file</button></a>
                     </div>
                 </div>
             </div>

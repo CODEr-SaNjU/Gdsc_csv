@@ -4,3 +4,8 @@ from django.db import models
 
 class Documents(models.Model):
     document = models.FileField(upload_to='uploads/')
+
+
+
+class e2k(models.Model):
+    e2k_file = models.FileField(upload_to='uploads/')

@@ -63,6 +63,30 @@ def csv_files(request):
 
 
 
+def e2k_File(request):
+    fulfile = open(file_name, 'r')  # giving filename
+    fulread = fulfile.readlines()
+    for i in range(len(fulread)):
+        if i == 0:
+            dict1['filepath'] = fulread[i]
+        else:
+            if '$' == fulread[i][0]:
+                if '/' in fulread[i]:
+                    filenam = fulread[i].replace("/", " ")
+                    dict1[filenam[0:-1]] = []
+                else:
+                    filenam = fulread[i]
+                    dict1[filenam[0:-1]] = []
+                for j in range(i, len(fulread)):
+                    if j < len(fulread) - 1:
+                        if '$' in fulread[j + 1]:
+                            break
+                        else:
+                            dict1[filenam[0:-1]].append(fulread[j])
+                    else:
+                        dict1[filenam[0:-1]].append(fulread[j])
+    filename = fpath1
+    return render(request,"html_files/e2k_File.htm")
 
 
 
