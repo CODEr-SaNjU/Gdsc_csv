@@ -64,13 +64,15 @@ def csv_files(request):
 
 
 def e2k_File(request):
+    dict1 = {}
     if request.method == 'POST' and request.FILES['files']:
         myfile = request.FILES['files']
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
         uploaded_file_url = os.path.join(settings.BASE_DIR+fs.url(filename))
+        print(uploaded_file_url)
         if os.path.exists(uploaded_file_url)==True:
-            fulfile = open(file_name, 'r')  # giving filename
+            fulfile = open(uploaded_file_url, 'r')  # giving filename
             fulread = fulfile.readlines()
             for i in range(len(fulread)):
                 if i == 0:
@@ -91,8 +93,9 @@ def e2k_File(request):
                                     dict1[filenam[0:-1]].append(fulread[j])
                             else:
                                 dict1[filenam[0:-1]].append(fulread[j])
+            print(filenam)
             return render(request, 'html_files/e2k_File.htm',)
-            filename = fpath1
+            
         else:
             return HttpResponse("please remove space from filename ya add _ in filename")
 
