@@ -14,6 +14,13 @@ from wsgiref.util import FileWrapper
 import random
 
 
+
+
+
+def index(request):
+    return render(request,"html_files/Dashboard.htm")
+
+
 def csv_files(request):
     if request.method == 'POST' and request.FILES['files']:
         myfile = request.FILES['files']
