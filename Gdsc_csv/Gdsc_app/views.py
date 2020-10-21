@@ -64,28 +64,40 @@ def csv_files(request):
 
 
 def e2k_File(request):
-    fulfile = open(file_name, 'r')  # giving filename
-    fulread = fulfile.readlines()
-    for i in range(len(fulread)):
-        if i == 0:
-            dict1['filepath'] = fulread[i]
-        else:
-            if '$' == fulread[i][0]:
-                if '/' in fulread[i]:
-                    filenam = fulread[i].replace("/", " ")
-                    dict1[filenam[0:-1]] = []
+    if request.method == 'POST' and request.FILES['files']:
+        myfile = request.FILES['files']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = os.path.join(settings.BASE_DIR+fs.url(filename))
+        if os.path.exists(uploaded_file_url)==True:
+            fulfile = open(file_name, 'r')  # giving filename
+            fulread = fulfile.readlines()
+            for i in range(len(fulread)):
+                if i == 0:
+                    dict1['filepath'] = fulread[i]
                 else:
-                    filenam = fulread[i]
-                    dict1[filenam[0:-1]] = []
-                for j in range(i, len(fulread)):
-                    if j < len(fulread) - 1:
-                        if '$' in fulread[j + 1]:
-                            break
+                    if '$' == fulread[i][0]:
+                        if '/' in fulread[i]:
+                            filenam = fulread[i].replace("/", " ")
+                            dict1[filenam[0:-1]] = []
                         else:
-                            dict1[filenam[0:-1]].append(fulread[j])
-                    else:
-                        dict1[filenam[0:-1]].append(fulread[j])
-    filename = fpath1
+                            filenam = fulread[i]
+                            dict1[filenam[0:-1]] = []
+                        for j in range(i, len(fulread)):
+                            if j < len(fulread) - 1:
+                                if '$' in fulread[j + 1]:
+                                    break
+                                else:
+                                    dict1[filenam[0:-1]].append(fulread[j])
+                            else:
+                                dict1[filenam[0:-1]].append(fulread[j])
+            return render(request, 'html_files/e2k_File.htm',)
+            filename = fpath1
+        else:
+            return HttpResponse("please remove space from filename ya add _ in filename")
+
+
+
     return render(request,"html_files/e2k_File.htm")
 
 
