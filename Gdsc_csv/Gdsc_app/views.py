@@ -64,7 +64,6 @@ def csv_files(request):
 
 
 def e2k_File(request):
-    dict1 = {}
     if request.method == 'POST' and request.FILES['files']:
         myfile = request.FILES['files']
         fs = FileSystemStorage()
@@ -74,6 +73,10 @@ def e2k_File(request):
         if os.path.exists(uploaded_file_url)==True:
             fulfile = open(uploaded_file_url, 'r')  # giving filename
             fulread = fulfile.readlines()
+            dict1 = {}
+            # print("file read ",fulread)
+            # print("ful file ",fulfile)
+            # print("len ful read",len(fulread))
             for i in range(len(fulread)):
                 if i == 0:
                     dict1['filepath'] = fulread[i]
@@ -93,7 +96,7 @@ def e2k_File(request):
                                     dict1[filenam[0:-1]].append(fulread[j])
                             else:
                                 dict1[filenam[0:-1]].append(fulread[j])
-            print(filenam)
+            
             return render(request, 'html_files/e2k_File.htm',)
             
         else:
