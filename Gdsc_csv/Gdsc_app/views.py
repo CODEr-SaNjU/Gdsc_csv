@@ -23,6 +23,7 @@ def index(request):
     return render(request,"html_files/Dashboard.htm")
 
 
+
 def csv_files(request):
     if request.method == 'POST' and request.FILES['files']:
         myfile = request.FILES['files']
@@ -586,7 +587,7 @@ def e2k_File(request):
                     beam_lab1.sort()
                     beam_lab2 = list(map(lambda x: type + str(x), beam_lab1))            
                     beam_label.extend(beam_lab2)
-
+            print("line 589 :: ",read_linass)
 
 
             df_linassgn_dict = {'Beam label': beam_label, 'Storey': storey_name, 'Section': section_name,
@@ -605,9 +606,11 @@ def e2k_File(request):
 
             df_linassgn = pd.DataFrame(df_linassgn2_dict)
 
-            # print(df_linassgn)
-            # df_linassgn1 = pd.DataFrame(df_linassgn1_dict)
+            
+            print("lines :: ",df_linassgn)
+            df_linassgn1 = pd.DataFrame(df_linassgn1_dict)
 
+            print("lines 612 :: ",df_linassgn1)
 
 
 
@@ -728,10 +731,10 @@ def e2k_File(request):
                                     floor_name + 'M3I' + 'BRACE': bracelist_I_I + bracelist_I_N,
                                     floor_name + 'M3J' + 'BRACE': bracelist_I_J + bracelist_I_N}
 
-                x = dictof_beamstoreywise.update(dictof_beamstorey)
-            print("line number 732",dictof_beamstorey)
+                dictof_beamstoreywise.update(dictof_beamstorey)
+            # print("line number 732 ::",dictof_beamstorey)
             # for i, j in dictof_beamstoreywise.items():
-            #     print(i, j)
+            #     print("lines",i, j)
 
                 
             return render(request, 'html_files/e2k_File.htm',)
