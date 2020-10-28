@@ -639,7 +639,7 @@ for storey in range(len(listof_storey)):
                 if 'M3I' in df_linassgn_dict['Release type'][index]:
                     beamlist_I_I.append(df_linassgn_dict['Beam label'][index])
                 elif 'M3J' in df_linassgn_dict['Release type'][index]:
-                    beamlist_I_J.append(df_linassgn_dict['Beam label'][index])
+                    beamlist_I_J.append(df_linassgn_dict['Beam label'][index])    
                 else:
                     beamlist_I_N.append(df_linassgn_dict['Beam label'][index])
 
